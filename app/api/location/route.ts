@@ -5,18 +5,11 @@ export async function GET(req: NextRequest) {
   try {
     const apiKey = process.env.OPENWEATHER_API_KEY;
     const searchParams = req.nextUrl.searchParams;
-    const lat = searchParams.get("lat");
-    const lon = searchParams.get("lon");
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    const city = searchParams.get("city");
+    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
 
-    const res = await fetch(url, {
-      next: {
-        revalidate: 900,
-      },
-    });
-
-    const weather = await res.json();
-    return NextResponse.json(weather);
+    const res = await axios.get(url);
+    return NextResponse.json(res.data);
   } catch (error) {
     console.log("Error fetching data");
     return new Response("error", { status: 500 });

@@ -1,4 +1,8 @@
 "use client";
+import {
+  useGlobalContext,
+  useGlobalContextUpdate,
+} from "@/app/Context/globalContext";
 import { CommandIcon } from "@/app/utils/Icons";
 import { Button } from "@/components/ui/button";
 import { Command, CommandInput } from "@/components/ui/command";
@@ -10,11 +14,24 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import React from "react";
+import React, { useState } from "react";
 
 const Search = () => {
+  const { location, inputValue, handleInput } = useGlobalContext();
+  const { setActiveCoordinates } = useGlobalContextUpdate();
+  const [hoverIdx, setHoverIdx] = useState(0);
+  const [close, setClose] = useState(false);
+
+  const closeDialog = () => {
+    setClose(false);
+  };
+
+  const getCoordinates = (lat: number, lon: number) => {
+    setActiveCoordinates([lat, lon]);
+    closeDialog();
+  };
   return (
-    <Dialog>
+    <Dialog open={close} onOpenChange={setClose}>
       <DialogTrigger asChild>
         <Button
           variant="outline"
@@ -29,9 +46,45 @@ const Search = () => {
       </DialogTrigger>
       <DialogContent className="p-0">
         <Command className="rounded-lg border shadow-md">
-          <CommandInput placeholder="Search here..." />
+          <CommandInput
+            placeholder="Search here..."
+            value={inputValue}
+            onChangeCapture={handleInput}
+          />
           <ul className="px-3 pb-2">
             <p className="p-2 text-sm text-muted-foreground">Suggestions</p>
+            {location.length === 0 && <p>No results.</p>}
+
+            {location &&
+              location.map(
+                (
+                  item: {
+                    name: string;
+                    country: string;
+                    lat: number;
+                    lon: number;
+                  },
+                  index: number
+                ) => {
+                  const { name, country } = item;
+                  return (
+                    <li
+                      key={index}
+                      className={`px-2 py-3 cursor-default text-sm rounded-sm ${
+                        hoverIdx === index ? "bg-accent" : ""
+                      }`}
+                      onMouseEnter={() => setHoverIdx(index)}
+                      onClick={() => {
+                        getCoordinates(item?.lat, item?.lon);
+                      }}
+                    >
+                      <p>
+                        {name}, {country}
+                      </p>
+                    </li>
+                  );
+                }
+              )}
           </ul>
         </Command>
       </DialogContent>

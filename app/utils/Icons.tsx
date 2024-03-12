@@ -1,10 +1,15 @@
 import {
+  CalendarDays,
   CloudDrizzle,
   CloudLightning,
   CloudRain,
   CloudRainWind,
   CloudSun,
   Cloudy,
+  Droplets,
+  Eye,
+  EyeIcon,
+  Gauge,
   Github,
   Navigation,
   Snowflake,
@@ -29,3 +34,7 @@ export const windIcon = <Wind size={14} />;
 export const uvSun = <SunDim size={18} />;
 export const precipIcon = <CloudRainWind size={16} />;
 export const thermometer = <Thermometer size={16} />;
+export const humidityIcon = <Droplets size={16} />;
+export const visibilityIcon = <EyeIcon size={16} />;
+export const pressureIcon = <Gauge size={16} />;
+export const calendarIcon = <CalendarDays size={16} />;
