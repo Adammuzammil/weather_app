@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 import { useGlobalContext } from "@/app/Context/globalContext";
 import React, { useEffect } from "react";
 
-function SetViewOnClick({ currentCoordinates }) {
+function SetViewOnClick({ currentCoordinates }: any) {
   const map = useMap();
 
   useEffect(() => {
