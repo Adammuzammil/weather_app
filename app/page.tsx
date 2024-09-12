@@ -10,10 +10,11 @@ import Precipitation from "./Components/Precipitation/Precipitation";
 import FeelsLike from "./Components/Feelslike/FeelsLike";
 import Humidity from "./Components/Humidity/Humidity";
 import Pressure from "./Components/Pressure/Pressure";
-import Mapbox from "./Components/Mapbox/Mapbox";
 import InitialPlaces from "./utils/InitialPlaces";
 import FiveDayForecast from "./Components/FiveDayForecast/FiveDayForecast";
 import Visibility from "./Components/Visibility/Visibility";
+import Map from "./Components/Mapbox/Map";
+import { useGlobalContextUpdate } from "./Context/globalContext";
 
 export default function Home() {
   return (
@@ -38,24 +39,7 @@ export default function Home() {
             <Pressure />
           </div>
           <div className="mapbox-container mt-4 flex">
-            <Mapbox />
-            <div className="states flex flex-col gap-3 flex-1 pl-2">
-              <h2 className="flex items-center gap-2 font-medium px-4">
-                Top large Cities
-              </h2>
-              <div className="flex flex-col gap-4">
-                {InitialPlaces.map((state, index) => {
-                  return (
-                    <div
-                      className="border rounded-lg shadow-sm dark:bg-dark-grey dark:shadow-none cursor-pointer"
-                      key={index}
-                    >
-                      <p className="px-6 py-4">{state.name}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            <Map />
           </div>
         </div>
       </div>

@@ -51,7 +51,7 @@ const DailyForecast = () => {
       })
     : [];
 
-  console.log(filteredDate);
+  // console.log("Details", filteredDate);
 
   return (
     <div
@@ -61,8 +61,8 @@ const DailyForecast = () => {
       <div className="h-full flex gap-10 overflow-hidden">
         {filteredDate.length < 1 ? (
           <div>
-            <h1 className="text-[3rem] line-through text-rose-500">
-              No Data Available!
+            <h1 className="text-xl line-through text-rose-500">
+              Unavailable data
             </h1>
           </div>
         ) : (

@@ -47,7 +47,7 @@ const FiveDayForecast = () => {
     forecastData.push(processedForecast(dailyData));
   }
 
-  console.log(forecastData);
+  // console.log(forecastData);
 
   return (
     <div

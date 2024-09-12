@@ -48,7 +48,7 @@ const UVIndex = () => {
         <p className="pt-2 pb-1">{uvCategory(maxUVIndex).text}</p>
         <Progress className="progress-bar" value={maxUVIndex * 10} />
       </div>
-      <p className="">{uvCategory(maxUVIndex).description}</p>
+      <p className="text-sm">{uvCategory(maxUVIndex).description}</p>
     </div>
   );
 };

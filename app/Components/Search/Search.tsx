@@ -14,24 +14,31 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Search = () => {
   const { location, inputValue, handleInput } = useGlobalContext();
   const { setActiveCoordinates } = useGlobalContextUpdate();
   const [hoverIdx, setHoverIdx] = useState(0);
-  const [close, setClose] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const closeDialog = () => {
-    setClose(false);
-  };
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen((open) => !open);
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
 
   const getCoordinates = (lat: number, lon: number) => {
     setActiveCoordinates([lat, lon]);
-    closeDialog();
+    // closeDialog();
   };
   return (
-    <Dialog open={close} onOpenChange={setClose}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           variant="outline"
@@ -40,7 +47,7 @@ const Search = () => {
           <p className="text-sm text-muted-foreground">Search Here...</p>
           <div className="command dark:bg-[#262626] hover:dark:bg-[#131313] hover:bg-slate-100 bg-slate-200  py-[2px] pl-[5px] pr-[7px] rounded-sm ml-[10rem] flex items-center gap-2">
             {CommandIcon}
-            <span className="text-[9px]">J</span>
+            <span className="text-[9px]">K</span>
           </div>
         </Button>
       </DialogTrigger>

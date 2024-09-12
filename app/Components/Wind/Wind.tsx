@@ -10,11 +10,11 @@ const Wind = () => {
   const windDir = weatherData?.wind?.deg;
 
   return (
-    <div className="h-[12rem] border px-5 pt-4 pb-5 rounded-lg flex flex-col gap-1">
+    <div className="h-[12rem] border px-4 pt-6 pb-5 rounded-lg flex flex-col">
       <h2 className="flex items-center gap-2 font-medium">{windIcon} Wind</h2>
 
-      <div className="relative -mt-5 flex h-[10rem] w-[10rem] items-center justify-center top-[1rem] left-[1rem] ">
-        <div className="font-medium absolute text-sm">
+      <div className="relative left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex h-[10rem] w-[10rem] items-center justify-center  pb-2">
+        <div className="font-medium absolute text-sm left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           {Math.round(windSpeed)} m/s
         </div>
         <svg

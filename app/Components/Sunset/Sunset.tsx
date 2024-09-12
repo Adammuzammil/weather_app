@@ -12,7 +12,7 @@ const Sunset = () => {
   const sunsetTime = unixToTime(time, timeZone);
   const sunRise = unixToTime(weatherData?.sys?.sunrise, timeZone);
   return (
-    <div className="h-[12rem] border px-4 pt-6 pb-5 rounded-lg flex flex-col gap-8">
+    <div className="h-[12rem] border px-4 pt-6 pb-5 rounded-lg flex flex-col justify-center items-center gap-8">
       <div className="top">
         <h2 className="flex items-center gap-2 font-medium">
           <svg
